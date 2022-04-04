@@ -19,8 +19,12 @@ function handleSubmit(event) {
   formResult[$form.elements.title.name] = $form.elements.title.value;
   formResult[$form.elements.photoUrl.name] = $form.elements.photoUrl.value;
   formResult[$form.elements.notes.name] = $form.elements.notes.value;
+  formResult.nextEntryId = data.nextEntryId;
+  data.nextEntryId++;
+  data.entries.unshift(formResult);
 
   console.log('form results: ', formResult);
+  console.log('data: ', data);
   $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
 }
