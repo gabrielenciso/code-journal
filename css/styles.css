@@ -1,29 +1,83 @@
+body {
+  background-color: #f0f0f0;
+}
+
 .font-header {
   font-family: "Proza Libre", sans-serif;
-  font-weight: 400, regular;
+  font-weight: 400;
   font-size: 20px;
   line-height: 27.3px;
 }
 
 .font-form {
   font-family: "Proza Libre", sans-serif;
-  font-weight: 600, semi-bold;
+  font-weight: 600;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+label,
+input,
+textarea {
+  display: block;
+  width: 100%;
 }
 
 label {
   font-size: 16px;
   line-height: 21px;
+  margin-bottom: 8px;
+}
+
+input,
+textarea {
+  margin-bottom: 25px;
+  border-radius: 5px;
+  border: 1.5px solid #b6b6b6;
+}
+
+input {
+  height: 50px;
+}
+
+textarea {
+  resize: none;
+  height: 130px;
 }
 
 h1 {
-  font-size: 30px;
+  font-family: "Proza Libre", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
   line-height: 40px;
 }
 
 header {
+  margin: 0 auto;
+  padding: 10px 0;
   background-color: #562b81;
+  color: white;
 }
 
-main {
-  background-color: #f0f0f0;
+.photo-preview {
+  margin-bottom: 25px;
+}
+
+.photo-preview img {
+  width: 100%;
+  object-fit: cover;
+}
+
+button {
+  font-family: "Open sans", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  background-color: #562b81;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 5px;
+  border: none;
 }
