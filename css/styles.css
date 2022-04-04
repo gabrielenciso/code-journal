@@ -5,6 +5,25 @@
   line-height: 27.3px;
 }
 
+.font-form {
+  font-family: "Proza Libre", sans-serif;
+  font-weight: 600, semi-bold;
+}
+
+label {
+  font-size: 16px;
+  line-height: 21px;
+}
+
+h1 {
+  font-size: 30px;
+  line-height: 40px;
+}
+
 header {
   background-color: #562b81;
+}
+
+main {
+  background-color: #f0f0f0;
 }

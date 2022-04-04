@@ -16,11 +16,38 @@
 </head>
 <body>
   <header>
-    <h2>Code Journal</h2>
+    <h2 class="font-header">Code Journal</h2>
   </header>
-  <main>
-    <h1>New Entry</h1>
-    <div data-view="entry-form">
+  <main class="container">
+    <h1 class="column-half">New Entry</h1>
+    <div data-view="entry-form row">
+      <div class="photo-preview column-half">
+
+      </div>
+      <form>
+        <label for="title">Title</label>
+        <input
+        name="title"
+        type="text"
+        id="title"
+        class="column-half">
+        <label for="photo-url">Photo URL</label>
+        <input
+        name="photo-url"
+        type="text"
+        id="photo-url"
+        class="column-half">
+        <label for="notes">Notes</label>
+        <input
+        name="notes"
+        type="text"
+        id="notes"
+        class="column-full">
+        <div class="form-actions column-full">
+          <button type="submit">SAVE</button>
+        </div>
+      </form>
+
 
     </div>
   </main>
