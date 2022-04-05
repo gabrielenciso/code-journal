@@ -9,6 +9,6 @@ var data = {
 
 var previousData = localStorage.getItem('journal-logs');
 
-if (data.entries !== null) {
+if (data.entries !== []) {
   data = JSON.parse(previousData);
 }

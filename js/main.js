@@ -20,8 +20,8 @@ function handleSubmit(event) {
   data.nextEntryId++;
   data.entries.unshift(formResult);
 
-  console.log('data: ', data);
   $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
+
   $form.reset();
 }
 
