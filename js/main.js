@@ -9,7 +9,11 @@ var $entryNav = document.querySelector('.entries-nav');
 var $entryForm = document.querySelector('div[data-view="entry-form"]');
 var $entriesPage = document.querySelector('div[data-view="entries"]');
 
+var $entriesList = document.querySelector('.entries-list');
+
 var $buttonNew = document.querySelector('.button-to-form');
+
+var $emptyEntries = document.querySelector('div[data-view="entries"] > p');
 
 function handlePhotoUpdate(event) {
   $photoPreviewSRC.setAttribute('src', event.target.value);
@@ -27,11 +31,15 @@ function handleSubmit(event) {
   data.entries.unshift(formResult);
 
   $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
-
+  $entriesList.prepend(renderEntry(formResult));
   $form.reset();
+
+  $entryForm.className = 'hidden';
+  $entriesPage.className = '';
+  $emptyEntries.remove();
 }
 
-function makeEntry(entries) {
+function renderEntry(entries) {
   // <li class="row">
   //   <div class="photo-preview column-half">
   //     <img src="images/placeholder-image-square.jpg">
@@ -72,16 +80,15 @@ function makeEntry(entries) {
 
   $divText.appendChild($title);
   $divText.appendChild($text);
-
   return $entry;
 }
 
 function handleMakeEntry(event) {
-  var $entriesList = document.querySelector('.entries-list');
-
-  for (var i = 0; i < data.entries.length; i++) {
-    var $entry = makeEntry(data.entries[i]);
-    $entriesList.appendChild($entry);
+  if (data.entries !== []) {
+    for (var i = 0; i < data.entries.length; i++) {
+      var $entry = renderEntry(data.entries[i]);
+      $entriesList.appendChild($entry);
+    }
   }
 }
 
@@ -95,8 +102,13 @@ function handleToForm(event) {
   $entriesPage.className = 'hidden';
 }
 
+if (data.entries.length > 0) {
+  $emptyEntries.remove();
+}
+
 $photoURLInput.addEventListener('input', handlePhotoUpdate);
 $form.addEventListener('submit', handleSubmit);
-window.addEventListener('DOMContentLoaded', handleMakeEntry);
 $entryNav.addEventListener('click', handleEntriesNav);
 $buttonNew.addEventListener('click', handleToForm);
+
+window.addEventListener('DOMContentLoaded', handleMakeEntry);
