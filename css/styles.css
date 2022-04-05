@@ -19,6 +19,10 @@ body {
   justify-content: flex-end;
 }
 
+.hidden {
+  display: none;
+}
+
 label,
 input,
 textarea {
@@ -64,8 +68,21 @@ textarea:focus {
 h1 {
   font-family: "Proza Libre", sans-serif;
   font-weight: 600;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 40px;
+}
+
+h2 {
+  font-size: 28px;
+  margin: 0 auto;
+}
+
+p {
+  line-height: 30px;
+  margin-top: 5px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 100;
+  font-size: 18px;
 }
 
 header {
@@ -73,6 +90,10 @@ header {
   padding: 10px 0;
   background-color: #562b81;
   color: white;
+}
+
+header h3 {
+  margin: 5px 0;
 }
 
 .photo-preview {
@@ -95,4 +116,8 @@ button {
   padding: 8px 18px;
   border-radius: 5px;
   border: none;
+}
+
+ul {
+  padding-left: 0;
 }
