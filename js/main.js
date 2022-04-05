@@ -4,6 +4,7 @@
 var $photoURLInput = document.querySelector('#photoUrl');
 var $photoPreviewSRC = document.querySelector('.photo-preview img');
 var $form = document.querySelector('form');
+
 console.log($photoURLInput);
 console.log($photoPreviewSRC);
 console.log($form);
@@ -29,5 +30,11 @@ function handleSubmit(event) {
   $form.reset();
 }
 
+function handleUnload(event) {
+  var dataJSON = JSON.stringify(data);
+  localStorage.setItem('journal-logs', dataJSON);
+}
+
 $photoURLInput.addEventListener('input', handlePhotoUpdate);
 $form.addEventListener('submit', handleSubmit);
+window.addEventListener('beforeunload', handleUnload);
