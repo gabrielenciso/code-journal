@@ -12,3 +12,10 @@ var previousData = localStorage.getItem('journal-logs');
 if (data.entries !== []) {
   data = JSON.parse(previousData);
 }
+
+function handleUnload(event) {
+  var dataJSON = JSON.stringify(data);
+  localStorage.setItem('journal-logs', dataJSON);
+}
+
+window.addEventListener('beforeunload', handleUnload);

@@ -16,7 +16,7 @@ function handleSubmit(event) {
   formResult[$form.elements.title.name] = $form.elements.title.value;
   formResult[$form.elements.photoUrl.name] = $form.elements.photoUrl.value;
   formResult[$form.elements.notes.name] = $form.elements.notes.value;
-  formResult.nextEntryId = data.nextEntryId;
+  formResult.entryId = data.nextEntryId;
   data.nextEntryId++;
   data.entries.unshift(formResult);
 
@@ -25,11 +25,5 @@ function handleSubmit(event) {
   $form.reset();
 }
 
-function handleUnload(event) {
-  var dataJSON = JSON.stringify(data);
-  localStorage.setItem('journal-logs', dataJSON);
-}
-
 $photoURLInput.addEventListener('input', handlePhotoUpdate);
 $form.addEventListener('submit', handleSubmit);
-window.addEventListener('beforeunload', handleUnload);
