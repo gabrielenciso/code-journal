@@ -4,6 +4,10 @@
 var $photoURLInput = document.querySelector('#photoUrl');
 var $photoPreviewSRC = document.querySelector('.photo-preview img');
 var $form = document.querySelector('form');
+var $entryNav = document.querySelector('.entries-nav');
+
+var $entryForm = document.querySelector('div[data-view="entry-form"]');
+var $entriesPage = document.querySelector('div[data-view="entries"]');
 
 function handlePhotoUpdate(event) {
   $photoPreviewSRC.setAttribute('src', event.target.value);
@@ -79,6 +83,12 @@ function handleMakeEntry(event) {
   }
 }
 
+function handleEntriesNav(event) {
+  $entryForm.className = 'hidden';
+  $entriesPage.className = '';
+}
+
 $photoURLInput.addEventListener('input', handlePhotoUpdate);
 $form.addEventListener('submit', handleSubmit);
 window.addEventListener('DOMContentLoaded', handleMakeEntry);
+$entryNav.addEventListener('click', handleEntriesNav);
