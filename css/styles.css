@@ -130,6 +130,15 @@ button {
   border: none;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
+button:focus {
+  background-color: #371d50;
+  color: rgb(202, 202, 202);
+}
+
 ul {
   padding-left: 0;
 }
