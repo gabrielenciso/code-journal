@@ -68,21 +68,21 @@ textarea:focus {
 h1 {
   font-family: "Proza Libre", sans-serif;
   font-weight: 600;
-  font-size: 30px;
+  font-size: 40px;
   line-height: 40px;
 }
 
 h2 {
-  font-size: 28px;
+  font-size: 32px;
   margin: 0 auto;
 }
 
 p {
-  line-height: 30px;
+  line-height: 35px;
   margin-top: 5px;
   font-family: "Open Sans", sans-serif;
   font-weight: 100;
-  font-size: 18px;
+  font-size: 21px;
 }
 
 header {
@@ -120,4 +120,8 @@ button {
 
 ul {
   padding-left: 0;
+}
+
+li {
+  margin-bottom: 20px;
 }
