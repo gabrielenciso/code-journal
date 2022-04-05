@@ -13,13 +13,30 @@
   flex-wrap: wrap;
 }
 
+.center {
+  align-items: center;
+  text-align: center;
+}
+
 .column-full,
 .column-half {
   width: 100%;
 }
 
+.column-free {
+  width: auto;
+}
+
 .padding-left {
   padding-left: 0;
+}
+
+.padding-left-entries {
+  padding-left: 0;
+}
+
+.space-between {
+  justify-content: space-between;
 }
 
 @media screen and (min-width: 768px) {
@@ -38,5 +55,9 @@
 
   .padding-left {
     padding-left: 20px;
+  }
+
+  .padding-left-entries {
+    padding-left: 40px;
   }
 }
