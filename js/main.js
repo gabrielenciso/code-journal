@@ -70,5 +70,15 @@ function makeEntry(entries) {
   return $entry;
 }
 
+function handleMakeEntry(event) {
+  var $entriesList = document.querySelector('.entries-list');
+
+  for (var i = 0; i < data.entries.length; i++) {
+    var $entry = makeEntry(data.entries[i]);
+    $entriesList.appendChild($entry);
+  }
+}
+
 $photoURLInput.addEventListener('input', handlePhotoUpdate);
 $form.addEventListener('submit', handleSubmit);
+window.addEventListener('DOMContentLoaded', handleMakeEntry);
