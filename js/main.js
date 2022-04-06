@@ -1,17 +1,15 @@
 /* global data */
 /* exported data */
-
-var $photoURLInput = document.querySelector('#photoUrl');
-var $photoPreviewSRC = document.querySelector('.photo-preview img');
-var $form = document.querySelector('form');
 var $entryNav = document.querySelector('.entries-nav');
 
 var $entryForm = document.querySelector('div[data-view="entry-form"]');
+var $form = document.querySelector('form');
+var $photoURLInput = document.querySelector('#photoUrl');
+var $photoPreviewSRC = document.querySelector('.photo-preview img');
+
 var $entriesPage = document.querySelector('div[data-view="entries"]');
-
-var $entriesList = document.querySelector('.entries-list');
-
 var $buttonNew = document.querySelector('.button-to-form');
+var $entriesList = document.querySelector('.entries-list');
 
 var $emptyEntries = document.querySelector('div[data-view="entries"] > p');
 
@@ -96,9 +94,16 @@ function handleMakeEntry(event) {
   if (data.entries !== []) {
     for (var i = 0; i < data.entries.length; i++) {
       var $entry = renderEntry(data.entries[i]);
+      $entry.setAttribute('data-entry-id', data.entries[i].entryId);
       $entriesList.appendChild($entry);
     }
   }
+}
+
+function handleEdit(event) {
+  console.log('listetning');
+  console.log('event.target: ', event.target);
+  console.log('event.target.tagName: ', event.target.tagName);
 }
 
 function handleEntriesNav(event) {
@@ -119,5 +124,6 @@ $photoURLInput.addEventListener('input', handlePhotoUpdate);
 $form.addEventListener('submit', handleSubmit);
 $entryNav.addEventListener('click', handleEntriesNav);
 $buttonNew.addEventListener('click', handleToForm);
+$entriesList.addEventListener('click', handleEdit);
 
 window.addEventListener('DOMContentLoaded', handleMakeEntry);
