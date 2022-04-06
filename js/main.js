@@ -1,5 +1,8 @@
 /* global data */
 /* exported data */
+var $overlay = document.querySelector('.overlay');
+var $deleteConfirmation = document.querySelector('.delete-confirmation');
+
 var $entryNav = document.querySelector('.entries-nav');
 
 var $entryForm = document.querySelector('div[data-view="entry-form"]');
@@ -66,6 +69,10 @@ function handleSubmit(event) {
 
   $entryForm.className = 'hidden';
   $entriesPage.className = '';
+  $emptyEntries.remove();
+}
+
+if (data.entries.length > 0) {
   $emptyEntries.remove();
 }
 
@@ -174,8 +181,9 @@ function handleToForm(event) {
   $entriesPage.className = 'hidden';
 }
 
-if (data.entries.length > 0) {
-  $emptyEntries.remove();
+function handleDelete(event) {
+  $overlay.className = 'overlay';
+  $deleteConfirmation.className = 'delete-confirmation';
 }
 
 $photoURLInput.addEventListener('input', handlePhotoUpdate);
@@ -183,5 +191,6 @@ $form.addEventListener('submit', handleSubmit);
 $entryNav.addEventListener('click', handleEntriesNav);
 $buttonNew.addEventListener('click', handleToForm);
 $entriesList.addEventListener('click', handleEdit);
+$deleteEntry.addEventListener('click', handleDelete);
 
 window.addEventListener('DOMContentLoaded', handleMakeEntry);
