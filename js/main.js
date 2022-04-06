@@ -30,7 +30,9 @@ function handleSubmit(event) {
     data.entries.unshift(formResult);
 
     $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
-    $entriesList.prepend(renderEntry(formResult));
+    var $newEntry = renderEntry(formResult);
+    $newEntry.setAttribute('data-entry-id', formResult.entryId);
+    $entriesList.prepend($newEntry);
     $form.reset();
   } else {
     var editResult = {};
@@ -42,6 +44,7 @@ function handleSubmit(event) {
     for (var i = 0; i < data.entries.length; i++) {
       if (data.editing.entryId === data.entries[i].entryId) {
         data.entries.splice(i, 1, editResult);
+        break;
       }
     }
 
@@ -50,10 +53,14 @@ function handleSubmit(event) {
     for (var j = 0; j < $entriesListArray.length; j++) {
       var currentDataEntryId = $entriesListArray[j].getAttribute('data-entry-id');
       if (data.editing.entryId.toString() === currentDataEntryId) {
-        $entriesList.replaceChild(renderEntry(editResult), $entriesListArray[j]);
+        var $editedEntry = renderEntry(editResult);
+        $editedEntry.setAttribute('data-entry-id', data.editing.entryId);
+        $entriesList.replaceChild($editedEntry, $entriesListArray[j]);
+        break;
       }
     }
 
+    $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
     $form.reset();
     data.editing = null;
   }
@@ -96,17 +103,24 @@ function renderEntry(entries) {
   $entry.appendChild($divText);
 
   var $titleHead = document.createElement('div');
-  $titleHead.setAttribute('class', 'row space-between center');
+  $titleHead.setAttribute('class', 'row');
+
+  var $titleBlock = document.createElement('div');
+  $titleBlock.setAttribute('class', 'column-fifth-fill');
+
+  var $editIconBlock = document.createElement('div');
+  $editIconBlock.setAttribute('class', 'column-fifth text-align-end');
 
   var $title = document.createElement('h2');
-  $title.setAttribute('class', 'font-form column-free');
+  $title.setAttribute('class', 'font-form');
   $title.textContent = entries.title;
+  $titleBlock.appendChild($title);
 
-  var $editIcon = document.createElement('img');
-  $editIcon.setAttribute('src', 'images/Vector.png');
-  $editIcon.setAttribute('class', 'column-free');
+  var $editIcon = document.createElement('i');
+  $editIcon.setAttribute('class', 'fa-solid fa-pen fa-2xl column-fifth');
+  $editIconBlock.appendChild($editIcon);
 
-  $titleHead.append($title, $editIcon);
+  $titleHead.append($titleBlock, $editIconBlock);
 
   var $text = document.createElement('p');
   $text.textContent = entries.notes;
@@ -127,10 +141,11 @@ function handleMakeEntry(event) {
 }
 
 function handleEdit(event) {
-  // debugger;
-  if (event.target.tagName === 'IMG' && event.target.className === 'column-free') {
+  if (event.target.tagName === 'I') {
     $entryForm.className = '';
     $entriesPage.className = 'hidden';
+  } else {
+    return;
   }
 
   var dataId = event.target.closest('li').getAttribute('data-entry-id');
@@ -138,6 +153,7 @@ function handleEdit(event) {
     var dataEntryId = data.entries[i].entryId;
     if (dataId === dataEntryId.toString()) {
       data.editing = data.entries[i];
+      break;
     }
   }
 

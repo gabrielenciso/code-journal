@@ -77,11 +77,6 @@ h2 {
   margin: 0;
 }
 
-img.column-free {
-  width: 30px;
-  height: 30px;
-}
-
 p {
   font-family: "Open Sans", sans-serif;
   font-weight: 100;
@@ -153,6 +148,17 @@ li {
   margin-bottom: 20px;
 }
 
-li img:nth-child(2):hover {
+i {
+  color: #562b81;
+  position: relative;
+  top: 11px;
+  right: 18px;
+}
+
+i:hover {
   cursor: pointer;
+}
+
+i:active {
+  color: #382050;
 }

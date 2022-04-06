@@ -18,9 +18,21 @@
   text-align: center;
 }
 
+.text-align-end {
+  text-align: end;
+}
+
 .column-full,
 .column-half {
   width: 100%;
+}
+
+.column-fifth {
+  width: 20%;
+}
+
+.column-fifth-fill {
+  width: 80%;
 }
 
 .column-free {
