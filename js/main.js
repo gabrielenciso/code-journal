@@ -71,14 +71,23 @@ function renderEntry(entries) {
   $entry.appendChild($photoView);
   $entry.appendChild($divText);
 
+  var $titleHead = document.createElement('div');
+  $titleHead.setAttribute('class', 'row space-between center');
+
   var $title = document.createElement('h2');
-  $title.setAttribute('class', 'font-form ');
+  $title.setAttribute('class', 'font-form column-free');
   $title.textContent = entries.title;
+
+  var $editIcon = document.createElement('img');
+  $editIcon.setAttribute('src', 'images/Vector.png');
+  $editIcon.setAttribute('class', 'column-free');
+
+  $titleHead.append($title, $editIcon);
 
   var $text = document.createElement('p');
   $text.textContent = entries.notes;
 
-  $divText.appendChild($title);
+  $divText.appendChild($titleHead);
   $divText.appendChild($text);
   return $entry;
 }

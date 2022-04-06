@@ -74,7 +74,14 @@ h1 {
 
 h2 {
   font-size: 32px;
-  margin: 0 auto;
+  margin: 0;
+}
+
+img.column-free {
+  width: 30px;
+  height: 30px;
+
+  /* padding-top: px; */
 }
 
 p {
