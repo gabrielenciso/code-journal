@@ -80,8 +80,6 @@ h2 {
 img.column-free {
   width: 30px;
   height: 30px;
-
-  /* padding-top: px; */
 }
 
 p {
@@ -153,4 +151,8 @@ ul {
 
 li {
   margin-bottom: 20px;
+}
+
+li img:nth-child(2):hover {
+  cursor: pointer;
 }

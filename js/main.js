@@ -101,9 +101,10 @@ function handleMakeEntry(event) {
 }
 
 function handleEdit(event) {
-  console.log('listetning');
-  console.log('event.target: ', event.target);
-  console.log('event.target.tagName: ', event.target.tagName);
+  if (event.target.tagName === 'IMG' && event.target.className === 'column-free') {
+    $entryForm.className = '';
+    $entriesPage.className = 'hidden';
+  }
 }
 
 function handleEntriesNav(event) {
