@@ -101,9 +101,21 @@ function handleMakeEntry(event) {
 }
 
 function handleEdit(event) {
+  // debugger;
   if (event.target.tagName === 'IMG' && event.target.className === 'column-free') {
     $entryForm.className = '';
     $entriesPage.className = 'hidden';
+  }
+
+  // for loop through data entries
+  // get attribute data entry id
+  // if equal then put data editing property as that object
+  var dataId = event.target.closest('li').getAttribute('data-entry-id');
+  for (var i = 0; i < data.entries.length; i++) {
+    var dataEntryId = data.entries[i].entryId;
+    if (dataId === dataEntryId.toString()) {
+      data.editing = data.entries[i];
+    }
   }
 }
 
