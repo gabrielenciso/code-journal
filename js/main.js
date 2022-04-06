@@ -20,17 +20,35 @@ function handlePhotoUpdate(event) {
 function handleSubmit(event) {
   event.preventDefault();
 
-  var formResult = {};
-  formResult[$form.elements.title.name] = $form.elements.title.value;
-  formResult[$form.elements.photoUrl.name] = $form.elements.photoUrl.value;
-  formResult[$form.elements.notes.name] = $form.elements.notes.value;
-  formResult.entryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(formResult);
+  // if data.editing = null; then do regular
+  // else
+  if (data.editing === null) {
+    var formResult = {};
+    formResult[$form.elements.title.name] = $form.elements.title.value;
+    formResult[$form.elements.photoUrl.name] = $form.elements.photoUrl.value;
+    formResult[$form.elements.notes.name] = $form.elements.notes.value;
+    formResult.entryId = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(formResult);
 
-  $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $entriesList.prepend(renderEntry(formResult));
-  $form.reset();
+    $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $entriesList.prepend(renderEntry(formResult));
+    $form.reset();
+  } else {
+    var editResult = {};
+    editResult[$form.elements.title.name] = $form.elements.title.value;
+    editResult[$form.elements.photoUrl.name] = $form.elements.photoUrl.value;
+    editResult[$form.elements.notes.name] = $form.elements.notes.value;
+    editResult.entryId = data.editing.entryId;
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.editing.entryId === data.entries[i].entryId) {
+        data.entries.splice(i, 1, editResult);
+      }
+    }
+    // $entriesList.slice(i, 1, (renderEntry(editResult)));
+    $form.reset();
+    data.editing = null;
+  }
 
   $entryForm.className = 'hidden';
   $entriesPage.className = '';
@@ -107,9 +125,6 @@ function handleEdit(event) {
     $entriesPage.className = 'hidden';
   }
 
-  // for loop through data entries
-  // get attribute data entry id
-  // if equal then put data editing property as that object
   var dataId = event.target.closest('li').getAttribute('data-entry-id');
   for (var i = 0; i < data.entries.length; i++) {
     var dataEntryId = data.entries[i].entryId;
@@ -117,6 +132,12 @@ function handleEdit(event) {
       data.editing = data.entries[i];
     }
   }
+
+  $form.elements.title.value = data.editing.title;
+  $form.elements.photoUrl.value = data.editing.photoUrl;
+  $photoPreviewSRC.setAttribute('src', data.editing.photoUrl);
+  $form.elements.notes.value = data.editing.notes;
+
 }
 
 function handleEntriesNav(event) {
