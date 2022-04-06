@@ -31,7 +31,6 @@ function handleSubmit(event) {
 
     $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
     var $newEntry = renderEntry(formResult);
-    $newEntry.setAttribute('data-entry-id', formResult.entryId);
     $entriesList.prepend($newEntry);
     $form.reset();
   } else {
@@ -54,7 +53,6 @@ function handleSubmit(event) {
       var currentDataEntryId = $entriesListArray[j].getAttribute('data-entry-id');
       if (data.editing.entryId.toString() === currentDataEntryId) {
         var $editedEntry = renderEntry(editResult);
-        $editedEntry.setAttribute('data-entry-id', data.editing.entryId);
         $entriesList.replaceChild($editedEntry, $entriesListArray[j]);
         break;
       }
@@ -87,6 +85,7 @@ function renderEntry(entries) {
   // </li>
   var $entry = document.createElement('li');
   $entry.setAttribute('class', 'row');
+  $entry.setAttribute('data-entry-id', entries.entryId);
 
   var $photoView = document.createElement('div');
   $photoView.setAttribute('class', 'photo-preview column-half');
@@ -134,7 +133,6 @@ function handleMakeEntry(event) {
   if (data.entries !== []) {
     for (var i = 0; i < data.entries.length; i++) {
       var $entry = renderEntry(data.entries[i]);
-      $entry.setAttribute('data-entry-id', data.entries[i].entryId);
       $entriesList.appendChild($entry);
     }
   }
