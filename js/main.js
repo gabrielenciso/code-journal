@@ -20,8 +20,6 @@ function handlePhotoUpdate(event) {
 function handleSubmit(event) {
   event.preventDefault();
 
-  // if data.editing = null; then do regular
-  // else
   if (data.editing === null) {
     var formResult = {};
     formResult[$form.elements.title.name] = $form.elements.title.value;
@@ -40,12 +38,22 @@ function handleSubmit(event) {
     editResult[$form.elements.photoUrl.name] = $form.elements.photoUrl.value;
     editResult[$form.elements.notes.name] = $form.elements.notes.value;
     editResult.entryId = data.editing.entryId;
+
     for (var i = 0; i < data.entries.length; i++) {
       if (data.editing.entryId === data.entries[i].entryId) {
         data.entries.splice(i, 1, editResult);
       }
     }
-    // $entriesList.slice(i, 1, (renderEntry(editResult)));
+
+    var $entriesListArray = document.querySelectorAll('li');
+
+    for (var j = 0; j < $entriesListArray.length; j++) {
+      var currentDataEntryId = $entriesListArray[j].getAttribute('data-entry-id');
+      if (data.editing.entryId.toString() === currentDataEntryId) {
+        $entriesList.replaceChild(renderEntry(editResult), $entriesListArray[j]);
+      }
+    }
+
     $form.reset();
     data.editing = null;
   }
