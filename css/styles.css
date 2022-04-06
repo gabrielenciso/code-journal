@@ -74,7 +74,7 @@ h1 {
 
 h2 {
   font-size: 32px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 p {
@@ -146,4 +146,19 @@ ul {
 
 li {
   margin-bottom: 20px;
+}
+
+i {
+  color: #562b81;
+  position: relative;
+  top: 11px;
+  right: 18px;
+}
+
+i:hover {
+  cursor: pointer;
+}
+
+i:active {
+  color: #382050;
 }
