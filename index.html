@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Proza+Libre:wght@400;600&display=swap"
-    rel="stylesheet">
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Proza+Libre:wght@400;600&family=Roboto&display=swap"
+      rel="stylesheet">
   <script src="https://kit.fontawesome.com/49acd81928.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
@@ -46,8 +46,13 @@
           <label for="notes">Notes</label>
           <textarea name="notes" id="notes" required></textarea>
         </div>
-        <div class="form-actions column-full">
-          <button type="submit" class="save-button">SAVE</button>
+        <div class="form-actions">
+          <div class="column-free center">
+            <p class="delete-entry hidden">Delete Entry</p>
+          </div>
+          <div class="column-free">
+            <button type="submit" class="save-button column-free">SAVE</button>
+          </div>
         </div>
       </form>
     </div>

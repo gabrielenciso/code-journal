@@ -6,6 +6,7 @@ var $entryForm = document.querySelector('div[data-view="entry-form"]');
 var $form = document.querySelector('form');
 var $photoURLInput = document.querySelector('#photoUrl');
 var $photoPreviewSRC = document.querySelector('.photo-preview img');
+var $deleteEntry = document.querySelector('.delete-entry');
 
 var $entriesPage = document.querySelector('div[data-view="entries"]');
 var $buttonNew = document.querySelector('.button-to-form');
@@ -142,6 +143,7 @@ function handleEdit(event) {
   if (event.target.tagName === 'I') {
     $entryForm.className = '';
     $entriesPage.className = 'hidden';
+    $deleteEntry.className = 'delete-entry';
   } else {
     return;
   }
