@@ -21,6 +21,7 @@
 
 .text-align-end {
   text-align: end;
+  justify-content: flex-end;
 }
 
 .column-full,

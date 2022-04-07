@@ -34,6 +34,7 @@ function handleSubmit(event) {
     formResult[$form.elements.photoUrl.name] = $form.elements.photoUrl.value;
     formResult[$form.elements.notes.name] = $form.elements.notes.value;
     formResult.entryId = data.nextEntryId;
+    formResult.date = new Date();
     data.nextEntryId++;
     data.entries.unshift(formResult);
 
@@ -102,6 +103,8 @@ function renderEntry(entries) {
   var $titleHead = document.createElement('div');
   $titleHead.setAttribute('class', 'row');
 
+  var $titleHR = document.createElement('hr');
+
   var $titleBlock = document.createElement('div');
   $titleBlock.setAttribute('class', 'column-fifth-fill');
 
@@ -119,10 +122,20 @@ function renderEntry(entries) {
 
   $titleHead.append($titleBlock, $editIconBlock);
 
+  var $timeAndTags = document.createElement('div');
+  $timeAndTags.setAttribute('class', 'time-and-tags row');
+
+  var $timeBlock = document.createElement('p');
+  $timeBlock.setAttribute('class', 'time-block column-half');
+  $timeBlock.textContent = new Date(entries.date).toDateString();
+  $timeAndTags.append($timeBlock);
+
   var $text = document.createElement('p');
   $text.textContent = entries.notes;
 
   $divText.appendChild($titleHead);
+  $divText.appendChild($titleHR);
+  $divText.appendChild($timeAndTags);
   $divText.appendChild($text);
   return $entry;
 }
