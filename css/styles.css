@@ -83,7 +83,7 @@ p {
   font-family: "Open Sans", sans-serif;
   font-weight: 100;
   font-size: 21px;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 main p {
