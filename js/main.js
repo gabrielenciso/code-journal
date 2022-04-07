@@ -21,6 +21,8 @@ var $deleteConfirmation = document.querySelector('.delete-confirmation');
 var $deleteButtonConfirm = document.querySelector('.button-confirm');
 var $deleteButtonCancel = document.querySelector('.button-cancel');
 
+var $selectOrder = document.querySelector('#order-entries');
+
 function handlePhotoUpdate(event) {
   $photoPreviewSRC.setAttribute('src', event.target.value);
 }
@@ -229,6 +231,28 @@ function handleDeleteButtonConfirm(event) {
   $form.reset();
 }
 
+function handleSelectOrder(event) {
+  var $entriesListArray = document.querySelectorAll('li');
+
+  if (event.target.value === 'old-to-new') {
+    for (var i = 0; i < $entriesListArray.length; i++) {
+      $entriesList.removeChild($entriesListArray[i]);
+    }
+    for (var j = 0; j < data.entries.length; j++) {
+      var $entry = renderEntry(data.entries[j]);
+      $entriesList.prepend($entry);
+    }
+  } else if (event.target.value === 'new-to-old') {
+    for (var k = 0; k < $entriesListArray.length; k++) {
+      $entriesList.removeChild($entriesListArray[k]);
+    }
+    for (var l = 0; l < data.entries.length; l++) {
+      $entry = renderEntry(data.entries[l]);
+      $entriesList.append($entry);
+    }
+  }
+}
+
 $photoURLInput.addEventListener('input', handlePhotoUpdate);
 $form.addEventListener('submit', handleSubmit);
 $entryNav.addEventListener('click', handleEntriesNav);
@@ -237,5 +261,6 @@ $entriesList.addEventListener('click', handleEdit);
 $deleteEntry.addEventListener('click', handleDelete);
 $deleteButtonCancel.addEventListener('click', handleDeleteButtonCancel);
 $deleteButtonConfirm.addEventListener('click', handleDeleteButtonConfirm);
+$selectOrder.addEventListener('change', handleSelectOrder);
 
 window.addEventListener('DOMContentLoaded', handleMakeEntry);
