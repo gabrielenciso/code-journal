@@ -4,6 +4,7 @@ var data = {
   view: 'entry-form',
   entries: [],
   editing: null,
+  sortOldest: null,
   nextEntryId: 1
 };
 

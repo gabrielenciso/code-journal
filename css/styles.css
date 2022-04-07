@@ -21,10 +21,6 @@ body {
   margin-bottom: 20px;
 }
 
-.hidden {
-  display: none;
-}
-
 label,
 input,
 textarea {
@@ -71,7 +67,7 @@ h1 {
   font-family: "Proza Libre", sans-serif;
   font-weight: 600;
   font-size: 40px;
-  line-height: 40px;
+  line-height: 30px;
 }
 
 h2 {
@@ -82,13 +78,13 @@ h2 {
 p {
   font-family: "Open Sans", sans-serif;
   font-weight: 100;
-  font-size: 21px;
+  font-size: 18px;
   white-space: pre-wrap;
 }
 
 main p {
   margin-top: 5px;
-  line-height: 35px;
+  line-height: 30px;
 }
 
 header p {
@@ -234,4 +230,28 @@ i:active {
 
 .button-confirm:hover {
   background-color: #9c2020;
+}
+
+div.column-half {
+  overflow-wrap: break-word;
+}
+
+hr {
+  border: 1px solid #562b81;
+  border-radius: 10px;
+  margin: 0;
+}
+
+p.time-block {
+  font-size: 14px;
+  line-height: normal;
+  font-weight: bolder;
+}
+
+select {
+  font-size: 14px;
+  border-radius: 5px;
+  border: 2px solid #562b81;
+  padding: 2px;
+  background: #f0f0f0;
 }

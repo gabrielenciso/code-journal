@@ -21,6 +21,8 @@ var $deleteConfirmation = document.querySelector('.delete-confirmation');
 var $deleteButtonConfirm = document.querySelector('.button-confirm');
 var $deleteButtonCancel = document.querySelector('.button-cancel');
 
+var $selectOrder = document.querySelector('#order-entries');
+
 function handlePhotoUpdate(event) {
   $photoPreviewSRC.setAttribute('src', event.target.value);
 }
@@ -34,18 +36,24 @@ function handleSubmit(event) {
     formResult[$form.elements.photoUrl.name] = $form.elements.photoUrl.value;
     formResult[$form.elements.notes.name] = $form.elements.notes.value;
     formResult.entryId = data.nextEntryId;
+    formResult.date = new Date();
     data.nextEntryId++;
     data.entries.unshift(formResult);
 
     $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
     var $newEntry = renderEntry(formResult);
-    $entriesList.prepend($newEntry);
+    if (data.sortOldest === true) {
+      $entriesList.append($newEntry);
+    } else {
+      $entriesList.prepend($newEntry);
+    }
     $form.reset();
   } else {
     var editResult = {};
     editResult[$form.elements.title.name] = $form.elements.title.value;
     editResult[$form.elements.photoUrl.name] = $form.elements.photoUrl.value;
     editResult[$form.elements.notes.name] = $form.elements.notes.value;
+    editResult.date = data.editing.date;
     editResult.entryId = data.editing.entryId;
 
     for (var i = 0; i < data.entries.length; i++) {
@@ -102,6 +110,8 @@ function renderEntry(entries) {
   var $titleHead = document.createElement('div');
   $titleHead.setAttribute('class', 'row');
 
+  var $titleHR = document.createElement('hr');
+
   var $titleBlock = document.createElement('div');
   $titleBlock.setAttribute('class', 'column-fifth-fill');
 
@@ -119,10 +129,20 @@ function renderEntry(entries) {
 
   $titleHead.append($titleBlock, $editIconBlock);
 
+  var $timeAndTags = document.createElement('div');
+  $timeAndTags.setAttribute('class', 'time-and-tags row');
+
+  var $timeBlock = document.createElement('p');
+  $timeBlock.setAttribute('class', 'time-block column-half');
+  $timeBlock.textContent = new Date(entries.date).toDateString();
+  $timeAndTags.append($timeBlock);
+
   var $text = document.createElement('p');
   $text.textContent = entries.notes;
 
   $divText.appendChild($titleHead);
+  $divText.appendChild($titleHR);
+  $divText.appendChild($timeAndTags);
   $divText.appendChild($text);
   return $entry;
 }
@@ -216,6 +236,30 @@ function handleDeleteButtonConfirm(event) {
   $form.reset();
 }
 
+function handleSelectOrder(event) {
+  var $entriesListArray = document.querySelectorAll('li');
+
+  if (event.target.value === 'old-to-new') {
+    data.sortOldest = true;
+    for (var i = 0; i < $entriesListArray.length; i++) {
+      $entriesList.removeChild($entriesListArray[i]);
+    }
+    for (var j = 0; j < data.entries.length; j++) {
+      var $entry = renderEntry(data.entries[j]);
+      $entriesList.prepend($entry);
+    }
+  } else if (event.target.value === 'new-to-old') {
+    data.sortOldest = false;
+    for (var k = 0; k < $entriesListArray.length; k++) {
+      $entriesList.removeChild($entriesListArray[k]);
+    }
+    for (var l = 0; l < data.entries.length; l++) {
+      $entry = renderEntry(data.entries[l]);
+      $entriesList.append($entry);
+    }
+  }
+}
+
 $photoURLInput.addEventListener('input', handlePhotoUpdate);
 $form.addEventListener('submit', handleSubmit);
 $entryNav.addEventListener('click', handleEntriesNav);
@@ -224,5 +268,6 @@ $entriesList.addEventListener('click', handleEdit);
 $deleteEntry.addEventListener('click', handleDelete);
 $deleteButtonCancel.addEventListener('click', handleDeleteButtonCancel);
 $deleteButtonConfirm.addEventListener('click', handleDeleteButtonConfirm);
+$selectOrder.addEventListener('change', handleSelectOrder);
 
 window.addEventListener('DOMContentLoaded', handleMakeEntry);
