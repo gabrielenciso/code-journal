@@ -42,13 +42,18 @@ function handleSubmit(event) {
 
     $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
     var $newEntry = renderEntry(formResult);
-    $entriesList.prepend($newEntry);
+    if (data.sortOldest === true) {
+      $entriesList.append($newEntry);
+    } else {
+      $entriesList.prepend($newEntry);
+    }
     $form.reset();
   } else {
     var editResult = {};
     editResult[$form.elements.title.name] = $form.elements.title.value;
     editResult[$form.elements.photoUrl.name] = $form.elements.photoUrl.value;
     editResult[$form.elements.notes.name] = $form.elements.notes.value;
+    editResult.date = data.editing.date;
     editResult.entryId = data.editing.entryId;
 
     for (var i = 0; i < data.entries.length; i++) {
@@ -235,6 +240,7 @@ function handleSelectOrder(event) {
   var $entriesListArray = document.querySelectorAll('li');
 
   if (event.target.value === 'old-to-new') {
+    data.sortOldest = true;
     for (var i = 0; i < $entriesListArray.length; i++) {
       $entriesList.removeChild($entriesListArray[i]);
     }
@@ -243,6 +249,7 @@ function handleSelectOrder(event) {
       $entriesList.prepend($entry);
     }
   } else if (event.target.value === 'new-to-old') {
+    data.sortOldest = false;
     for (var k = 0; k < $entriesListArray.length; k++) {
       $entriesList.removeChild($entriesListArray[k]);
     }
