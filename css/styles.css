@@ -16,7 +16,9 @@ body {
 
 .form-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .hidden {
@@ -81,7 +83,7 @@ p {
   font-family: "Open Sans", sans-serif;
   font-weight: 100;
   font-size: 21px;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 main p {
@@ -92,6 +94,11 @@ main p {
 header p {
   font-size: 16px;
   margin: 0 20px 3px;
+}
+
+.delete-confirmation p {
+  font-size: 16px;
+  margin: 35px auto 25px;
 }
 
 header p:hover {
@@ -161,4 +168,70 @@ i:hover {
 
 i:active {
   color: #382050;
+}
+
+.delete-entry {
+  font-family: Roboto, monospace;
+  font-weight: 400;
+  font-size: 16px;
+  color: #e05757;
+  border-bottom: 1px solid #e05757;
+  padding: 8px 0;
+  margin: 8px 0;
+  line-height: 5px;
+}
+
+.delete-entry:hover {
+  cursor: pointer;
+  color: #942727;
+  border-bottom: 1px solid #942727;
+}
+
+.overlay {
+  background: linear-gradient(rgb(0 0 0 / 60%), rgb(0 0 0 / 60%));
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-confirmation {
+  position: absolute;
+  width: 350px;
+  height: 150px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.delete-confirmation div {
+  padding: 13px;
+}
+
+.button-cancel {
+  padding: 8px 10px;
+  background-color: #b6b6b6;
+  color: black;
+}
+
+.button-cancel:hover {
+  background-color: #838383;
+}
+
+.button-confirm {
+  padding: 8px 10px;
+  background-color: #dc2626;
+}
+
+.button-confirm:hover {
+  background-color: #9c2020;
 }

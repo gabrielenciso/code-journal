@@ -6,12 +6,20 @@ var $entryForm = document.querySelector('div[data-view="entry-form"]');
 var $form = document.querySelector('form');
 var $photoURLInput = document.querySelector('#photoUrl');
 var $photoPreviewSRC = document.querySelector('.photo-preview img');
+var $headerNewEntry = document.querySelector('div[data-view="entry-form"] h1:nth-child(1)');
+var $headerEditEntry = document.querySelector('div[data-view="entry-form"] h1:nth-child(2)');
+var $deleteEntry = document.querySelector('.delete-entry');
 
 var $entriesPage = document.querySelector('div[data-view="entries"]');
 var $buttonNew = document.querySelector('.button-to-form');
 var $entriesList = document.querySelector('.entries-list');
 
 var $emptyEntries = document.querySelector('div[data-view="entries"] > p');
+
+var $overlay = document.querySelector('.overlay');
+var $deleteConfirmation = document.querySelector('.delete-confirmation');
+var $deleteButtonConfirm = document.querySelector('.button-confirm');
+var $deleteButtonCancel = document.querySelector('.button-cancel');
 
 function handlePhotoUpdate(event) {
   $photoPreviewSRC.setAttribute('src', event.target.value);
@@ -68,21 +76,11 @@ function handleSubmit(event) {
   $emptyEntries.remove();
 }
 
+if (data.entries.length > 0) {
+  $emptyEntries.remove();
+}
+
 function renderEntry(entries) {
-  // <li class="row">
-  //   <div class="photo-preview column-half">
-  //     <img src="images/placeholder-image-square.jpg">
-  //   </div>
-  //   <div class="column-half padding-left-entries">
-  //     <h2 class="font-form">Ada Lovelace</h2>
-  //     <p>
-  //       Augusta Ada King, Countess of Lovelace was an English mathematician and writer, chiefly known for her work on Charles
-  //       Babbage's proposed mechanical general-purpose computer, the Analytical Engine.She was the first to recognize that the
-  //       machine had applications beyond pure calculation, and to have published the first algorithm intended to be carried out
-  //       by such a machine.
-  //     </p>
-  //   </div>
-  // </li>
   var $entry = document.createElement('li');
   $entry.setAttribute('class', 'row');
   $entry.setAttribute('data-entry-id', entries.entryId);
@@ -142,6 +140,9 @@ function handleEdit(event) {
   if (event.target.tagName === 'I') {
     $entryForm.className = '';
     $entriesPage.className = 'hidden';
+    $deleteEntry.className = 'delete-entry';
+    $headerNewEntry.className = 'hidden';
+    $headerEditEntry.className = '';
   } else {
     return;
   }
@@ -165,21 +166,63 @@ function handleEdit(event) {
 function handleEntriesNav(event) {
   $entryForm.className = 'hidden';
   $entriesPage.className = '';
+
+  data.editing = null;
+  $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $form.reset();
 }
 
-function handleToForm(event) {
+function handleNewEntry(event) {
   $entryForm.className = '';
   $entriesPage.className = 'hidden';
+  $deleteEntry.className = 'delete-entry hidden';
+  $headerNewEntry.className = '';
+  $headerEditEntry.className = 'hidden';
 }
 
-if (data.entries.length > 0) {
-  $emptyEntries.remove();
+function handleDelete(event) {
+  $overlay.className = 'overlay';
+  $deleteConfirmation.className = 'delete-confirmation';
+}
+
+function handleDeleteButtonCancel(event) {
+  $overlay.className = 'overlay hidden';
+  $deleteConfirmation.className = 'delete-confirmation hidden';
+}
+
+function handleDeleteButtonConfirm(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.editing.entryId === data.entries[i].entryId) {
+      data.entries.splice(i, 1);
+      break;
+    }
+  }
+
+  var $entriesListArray = document.querySelectorAll('li');
+  for (var j = 0; j < $entriesListArray.length; j++) {
+    var currentDataEntryId = $entriesListArray[j].getAttribute('data-entry-id');
+    if (data.editing.entryId.toString() === currentDataEntryId) {
+      $entriesListArray[j].remove();
+      break;
+    }
+  }
+
+  $overlay.className = 'overlay hidden';
+  $deleteConfirmation.className = 'delete-confirmation hidden';
+  $entryForm.className = 'hidden';
+  $entriesPage.className = '';
+
+  $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $form.reset();
 }
 
 $photoURLInput.addEventListener('input', handlePhotoUpdate);
 $form.addEventListener('submit', handleSubmit);
 $entryNav.addEventListener('click', handleEntriesNav);
-$buttonNew.addEventListener('click', handleToForm);
+$buttonNew.addEventListener('click', handleNewEntry);
 $entriesList.addEventListener('click', handleEdit);
+$deleteEntry.addEventListener('click', handleDelete);
+$deleteButtonCancel.addEventListener('click', handleDeleteButtonCancel);
+$deleteButtonConfirm.addEventListener('click', handleDeleteButtonConfirm);
 
 window.addEventListener('DOMContentLoaded', handleMakeEntry);
