@@ -6,6 +6,8 @@ var $entryForm = document.querySelector('div[data-view="entry-form"]');
 var $form = document.querySelector('form');
 var $photoURLInput = document.querySelector('#photoUrl');
 var $photoPreviewSRC = document.querySelector('.photo-preview img');
+var $headerNewEntry = document.querySelector('div[data-view="entry-form"] h1:nth-child(1)');
+var $headerEditEntry = document.querySelector('div[data-view="entry-form"] h1:nth-child(2)');
 var $deleteEntry = document.querySelector('.delete-entry');
 
 var $entriesPage = document.querySelector('div[data-view="entries"]');
@@ -139,6 +141,8 @@ function handleEdit(event) {
     $entryForm.className = '';
     $entriesPage.className = 'hidden';
     $deleteEntry.className = 'delete-entry';
+    $headerNewEntry.className = 'hidden';
+    $headerEditEntry.className = '';
   } else {
     return;
   }
@@ -162,12 +166,18 @@ function handleEdit(event) {
 function handleEntriesNav(event) {
   $entryForm.className = 'hidden';
   $entriesPage.className = '';
+
+  data.editing = null;
+  $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $form.reset();
 }
 
-function handleToForm(event) {
+function handleNewEntry(event) {
   $entryForm.className = '';
   $entriesPage.className = 'hidden';
   $deleteEntry.className = 'delete-entry hidden';
+  $headerNewEntry.className = '';
+  $headerEditEntry.className = 'hidden';
 }
 
 function handleDelete(event) {
@@ -201,12 +211,15 @@ function handleDeleteButtonConfirm(event) {
   $deleteConfirmation.className = 'delete-confirmation hidden';
   $entryForm.className = 'hidden';
   $entriesPage.className = '';
+
+  $photoPreviewSRC.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $form.reset();
 }
 
 $photoURLInput.addEventListener('input', handlePhotoUpdate);
 $form.addEventListener('submit', handleSubmit);
 $entryNav.addEventListener('click', handleEntriesNav);
-$buttonNew.addEventListener('click', handleToForm);
+$buttonNew.addEventListener('click', handleNewEntry);
 $entriesList.addEventListener('click', handleEdit);
 $deleteEntry.addEventListener('click', handleDelete);
 $deleteButtonCancel.addEventListener('click', handleDeleteButtonCancel);
