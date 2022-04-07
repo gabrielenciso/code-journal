@@ -1,8 +1,5 @@
 /* global data */
 /* exported data */
-var $overlay = document.querySelector('.overlay');
-var $deleteConfirmation = document.querySelector('.delete-confirmation');
-
 var $entryNav = document.querySelector('.entries-nav');
 
 var $entryForm = document.querySelector('div[data-view="entry-form"]');
@@ -16,6 +13,11 @@ var $buttonNew = document.querySelector('.button-to-form');
 var $entriesList = document.querySelector('.entries-list');
 
 var $emptyEntries = document.querySelector('div[data-view="entries"] > p');
+
+var $overlay = document.querySelector('.overlay');
+var $deleteConfirmation = document.querySelector('.delete-confirmation');
+var $deleteButtonConfirm = document.querySelector('.button-confirm');
+var $deleteButtonCancel = document.querySelector('.button-cancel');
 
 function handlePhotoUpdate(event) {
   $photoPreviewSRC.setAttribute('src', event.target.value);
@@ -77,20 +79,6 @@ if (data.entries.length > 0) {
 }
 
 function renderEntry(entries) {
-  // <li class="row">
-  //   <div class="photo-preview column-half">
-  //     <img src="images/placeholder-image-square.jpg">
-  //   </div>
-  //   <div class="column-half padding-left-entries">
-  //     <h2 class="font-form">Ada Lovelace</h2>
-  //     <p>
-  //       Augusta Ada King, Countess of Lovelace was an English mathematician and writer, chiefly known for her work on Charles
-  //       Babbage's proposed mechanical general-purpose computer, the Analytical Engine.She was the first to recognize that the
-  //       machine had applications beyond pure calculation, and to have published the first algorithm intended to be carried out
-  //       by such a machine.
-  //     </p>
-  //   </div>
-  // </li>
   var $entry = document.createElement('li');
   $entry.setAttribute('class', 'row');
   $entry.setAttribute('data-entry-id', entries.entryId);
@@ -179,11 +167,40 @@ function handleEntriesNav(event) {
 function handleToForm(event) {
   $entryForm.className = '';
   $entriesPage.className = 'hidden';
+  $deleteEntry.className = 'delete-entry hidden';
 }
 
 function handleDelete(event) {
   $overlay.className = 'overlay';
   $deleteConfirmation.className = 'delete-confirmation';
+}
+
+function handleDeleteButtonCancel(event) {
+  $overlay.className = 'overlay hidden';
+  $deleteConfirmation.className = 'delete-confirmation hidden';
+}
+
+function handleDeleteButtonConfirm(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.editing.entryId === data.entries[i].entryId) {
+      data.entries.splice(i, 1);
+      break;
+    }
+  }
+
+  var $entriesListArray = document.querySelectorAll('li');
+  for (var j = 0; j < $entriesListArray.length; j++) {
+    var currentDataEntryId = $entriesListArray[j].getAttribute('data-entry-id');
+    if (data.editing.entryId.toString() === currentDataEntryId) {
+      $entriesListArray[j].remove();
+      break;
+    }
+  }
+
+  $overlay.className = 'overlay hidden';
+  $deleteConfirmation.className = 'delete-confirmation hidden';
+  $entryForm.className = 'hidden';
+  $entriesPage.className = '';
 }
 
 $photoURLInput.addEventListener('input', handlePhotoUpdate);
@@ -192,5 +209,7 @@ $entryNav.addEventListener('click', handleEntriesNav);
 $buttonNew.addEventListener('click', handleToForm);
 $entriesList.addEventListener('click', handleEdit);
 $deleteEntry.addEventListener('click', handleDelete);
+$deleteButtonCancel.addEventListener('click', handleDeleteButtonCancel);
+$deleteButtonConfirm.addEventListener('click', handleDeleteButtonConfirm);
 
 window.addEventListener('DOMContentLoaded', handleMakeEntry);
