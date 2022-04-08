@@ -25,6 +25,7 @@ var $selectOrder = document.querySelector('#order-entries');
 
 var $addTagButton = document.querySelector('.tags-block i');
 var $tagInput = document.querySelector('#tags');
+var $tagsBar = document.querySelector('.tags-block');
 
 function handlePhotoUpdate(event) {
   $photoPreviewSRC.setAttribute('src', event.target.value);
@@ -264,7 +265,15 @@ function handleSelectOrder(event) {
 }
 
 function handleAddTagButton(event) {
-  console.log($tagInput.value);
+  var tagText = $tagInput.value;
+
+  var $tagsBlock = document.createElement('div');
+  $tagsBlock.setAttribute('class', 'column-half-tag row');
+
+  var $tag = document.createElement('p');
+  $tag.className = 'tag';
+  $tag.textContent = tagText;
+  $tagsBlock;
   $tagInput.value = '';
 }
 
