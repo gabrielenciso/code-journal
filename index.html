@@ -37,7 +37,7 @@
     </div>
   </header>
   <main class="container">
-    <div data-view="entry-form" class="hidden">
+    <div data-view="entry-form" class="">
       <div class="row">
         <h1 class="column-full">New Entry</h1>
         <h1 class="column-full hidden">Edit Entry</h1>
@@ -51,6 +51,13 @@
           <input name="title" type="text" id="title" required>
           <label for="photoUrl">Photo URL</label>
           <input name="photoUrl" type="text" id="photoUrl" required>
+          <label for="tags">Tags</label>
+          <div class="tags-block row">
+            <div class="column-free">
+              <i class="fa-solid fa-plus fa-lg"></i>
+            </div>
+            <input name="tags" type="text" id="tags">
+          </div>
         </div>
         <div class="column-full">
           <label for="notes">Notes</label>
@@ -66,7 +73,7 @@
         </div>
       </form>
     </div>
-    <div data-view="entries" class="">
+    <div data-view="entries" class="hidden">
       <div class="row space-between center">
         <h1 class="column-free">Entries</h1>
         <div class="column-free">

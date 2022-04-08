@@ -29,6 +29,10 @@
   width: 100%;
 }
 
+.column-half-tag {
+  width: 50%;
+}
+
 .column-fifth {
   width: 20%;
 }

@@ -23,6 +23,9 @@ var $deleteButtonCancel = document.querySelector('.button-cancel');
 
 var $selectOrder = document.querySelector('#order-entries');
 
+var $addTagButton = document.querySelector('.tags-block i');
+var $tagInput = document.querySelector('#tags');
+
 function handlePhotoUpdate(event) {
   $photoPreviewSRC.setAttribute('src', event.target.value);
 }
@@ -260,6 +263,11 @@ function handleSelectOrder(event) {
   }
 }
 
+function handleAddTagButton(event) {
+  console.log($tagInput.value);
+  $tagInput.value = '';
+}
+
 $photoURLInput.addEventListener('input', handlePhotoUpdate);
 $form.addEventListener('submit', handleSubmit);
 $entryNav.addEventListener('click', handleEntriesNav);
@@ -269,5 +277,6 @@ $deleteEntry.addEventListener('click', handleDelete);
 $deleteButtonCancel.addEventListener('click', handleDeleteButtonCancel);
 $deleteButtonConfirm.addEventListener('click', handleDeleteButtonConfirm);
 $selectOrder.addEventListener('change', handleSelectOrder);
+$addTagButton.addEventListener('click', handleAddTagButton);
 
 window.addEventListener('DOMContentLoaded', handleMakeEntry);
